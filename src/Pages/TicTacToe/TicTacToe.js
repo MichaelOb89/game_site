@@ -1,13 +1,33 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import styles from "./TicTacToe.module.scss"
 import Square from "./Components/Square"
 
 export default function TicTacToe(){
-    const [turn, setTurn] = useState("X")
+    const [turn, setTurn] = useState(true)
     const [board, setBoard] = useState(["","","","","","","","","",])
     const checkWinner = () => {
-        
+        const winConditions =[
+            [board[0], board[1], board[2]],
+            [board[3], board[4], board[5]],
+            [board[6], board[7], board[8]],
+            [board[0], board[3], board[6]],
+            [board[1], board[4], board[7]],
+            [board[2], board[5], board[8]],
+            [board[0], board[4], board[8]],
+            [board[2], board[4], board[6]]
+        ]
+        for(let win of winConditions){
+            if(win[0]=="X" && win[1]=="X" && win[2]=="X"){
+                alert("X is winner")
+            }else if(win[0]=="O" && win[1]=="O" && win[2]=="O"){
+                alert("O is winner")
+            }
+        }
     }
+    useEffect(()=>{
+        checkWinner()
+    },[board])
+    
     return(
         <>
             <h1>Tic Tac Toe</h1>
