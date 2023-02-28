@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import styles from "./TicTacToe.module.scss"
 import Square from "./Components/Square"
+import io from "socket.io-client"
 
 export default function TicTacToe(){
     const [turn, setTurn] = useState(true)
@@ -27,7 +28,7 @@ export default function TicTacToe(){
     useEffect(()=>{
         checkWinner()
     },[board])
-    
+
     return(
         <>
             <h1>Tic Tac Toe</h1>
