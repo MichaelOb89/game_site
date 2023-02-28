@@ -6,6 +6,10 @@ import io from "socket.io-client"
 export default function TicTacToe(){
     const [turn, setTurn] = useState(true)
     const [board, setBoard] = useState(["","","","","","","","","",])
+    const socket = io()
+    socket.on('connect', () => {
+        console.log(socket.id)
+    })
     const checkWinner = () => {
         const winConditions =[
             [board[0], board[1], board[2]],

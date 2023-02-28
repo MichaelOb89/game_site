@@ -1,19 +1,18 @@
 require('dotenv').config()
 require('./config/database')
 const express = require('express')
+const cors = require('cors')
 const { createServer } = require("http");
-const { Server } = require("socket.io");
+const socketIo = require("socket.io");
 const logger = require('morgan')
 const path = require('path')
 const PORT = process.env.PORT || 3001
 
 const app = express()
 const httpServer = createServer(app);
-const io = new Server(httpServer, { /* options */ });
+const io = socketIo(httpServer);
 
-io.on("connection", (socket) => {
-    console.log("New socket connected")
-  });
+app.use(cors())
 
 app.use(express.json())
 app.use((req, res, next)=>{
@@ -27,10 +26,13 @@ app.use(require('./config/checkToken'))
 
 app.use('/api/users', require('./routes/api/users'))
 
-
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'build', 'index.html'))
 })
+
+io.on("connection", (socket) => {
+    console.log(`New socket ${socket.id} connected`)
+});
 
 httpServer.listen(PORT, () => {
     console.log(`Listening on ${PORT}`)
