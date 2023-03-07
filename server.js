@@ -8,6 +8,10 @@ const logger = require('morgan')
 const path = require('path')
 const PORT = process.env.PORT || 3001
 
+//===========GAME MANAGER FUNCTIONS=============
+const createRoom = require('./webSocketFunctions/Tic-Tac-Toe/gameManager')
+
+
 const app = express()
 const httpServer = createServer(app);
 const io = socketIo(httpServer);
@@ -32,6 +36,8 @@ app.get('*', (req, res) => {
 
 io.on("connection", (socket) => {
     console.log(`New socket ${socket.id} connected`)
+    //send active games
+    socket.on('createRoom', createRoom({io, socket}))
 });
 
 httpServer.listen(PORT, () => {
