@@ -2,6 +2,7 @@ import { useState } from 'react'
 import io from 'socket.io-client'
 import TicTacToe from '../TicTacToe/TicTacToe'
 import { useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
 
 export default function RomList(){
@@ -24,7 +25,7 @@ export default function RomList(){
     return(
         <>
             <input placeholder='Lobby Name' onChange={(evt)=>setLobbyName(evt.target.value)}/>
-            <button onClick={()=>createRoom(lobbyName)}>Create Lobby</button>
+            <Link to={`/tictactoe/${lobbyName}`}><button onClick={()=>createRoom(lobbyName)}>Create Lobby</button></Link>
         </>
     )
 }
