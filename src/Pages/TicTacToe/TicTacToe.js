@@ -1,10 +1,15 @@
 import { useState, useEffect } from "react"
 import styles from "./TicTacToe.module.scss"
 import Square from "./Components/Square"
+import io from "socket.io-client"
 
 export default function TicTacToe(){
     const [turn, setTurn] = useState(true)
     const [board, setBoard] = useState(["","","","","","","","","",])
+    const socket = io()
+    socket.on('connect', () => {
+        console.log(socket.id)
+    })
     const checkWinner = () => {
         const winConditions =[
             [board[0], board[1], board[2]],
@@ -27,7 +32,7 @@ export default function TicTacToe(){
     useEffect(()=>{
         checkWinner()
     },[board])
-    
+
     return(
         <>
             <h1>Tic Tac Toe</h1>

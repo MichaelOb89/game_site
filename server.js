@@ -1,11 +1,22 @@
 require('dotenv').config()
 require('./config/database')
 const express = require('express')
+const cors = require('cors')
+const { createServer } = require("http");
+const socketIo = require("socket.io");
 const logger = require('morgan')
 const path = require('path')
 const PORT = process.env.PORT || 3001
 
+//===========GAME MANAGER FUNCTIONS=============
+const createRoom = require('./webSocketFunctions/Tic-Tac-Toe/gameManager')
+
+
 const app = express()
+const httpServer = createServer(app);
+const io = socketIo(httpServer);
+
+app.use(cors())
 
 app.use(express.json())
 app.use((req, res, next)=>{
@@ -19,11 +30,16 @@ app.use(require('./config/checkToken'))
 
 app.use('/api/users', require('./routes/api/users'))
 
-
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'build', 'index.html'))
 })
 
-app.listen(PORT, () => {
+io.on("connection", (socket) => {
+    console.log(`New socket ${socket.id} connected`)
+    //send active games
+    socket.on('createRoom', createRoom({io, socket}))
+});
+
+httpServer.listen(PORT, () => {
     console.log(`Listening on ${PORT}`)
 })
