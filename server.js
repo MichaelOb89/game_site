@@ -9,8 +9,8 @@ const path = require('path')
 const PORT = process.env.PORT || 3001
 
 //===========GAME MANAGER FUNCTIONS=============
-const createRoom = require('./webSocketFunctions/Tic-Tac-Toe/gameManager')
-
+const createRoom = require('./webSocketFunctions/Tic-Tac-Toe/createRoom')
+const {sendGames, createGame, games} = require('./webSocketFunctions/Tic-Tac-Toe/ticTacToeManager')
 
 const app = express()
 const httpServer = createServer(app);
@@ -36,7 +36,8 @@ app.get('*', (req, res) => {
 
 io.on("connection", (socket) => {
     console.log(`New socket ${socket.id} connected`)
-    //send active games
+    socket.emit('games', games)////////NEXT STEP IS TO FIND HOW TO SEND THE GAMES TO THE CLIENT
+    console.log(games)
     socket.on('createRoom', createRoom({io, socket}))
 });
 

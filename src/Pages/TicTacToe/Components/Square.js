@@ -1,9 +1,9 @@
 import styles from "../TicTacToe.module.scss"
 
 
-export default function Square({squareNumber, style, turn, setTurn, board, setBoard}){
+export default function Square({squareNumber, style, turn, setTurn, board, setBoard, player}){
     const handleClick = (evt) =>{
-        if(turn){
+        if(turn && player == "X"){
             if(evt.target.textContent!=""){
                 alert("Square already selected")
             }else{
@@ -12,7 +12,7 @@ export default function Square({squareNumber, style, turn, setTurn, board, setBo
             ))
             setTurn(!turn)
             }
-        }else{
+        }else if(!turn && player == "O"){
             if(evt.target.textContent!=""){
                 alert("Square already selected")
             }else{
