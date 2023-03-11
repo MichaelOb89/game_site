@@ -3,6 +3,8 @@ import LoginForm from "../../Components/LoginForm/LoginForm"
 import SignUpForm from "../../Components/SignUpForm/SignUpForm"
 import * as userService from '../../utilities/users-service'
 
+import styles from "../AuthPage/AuthPage.module.scss"
+
 export default function AuthPage({setUser}){
     const [login, setLogin] = useState(false)
     const changeForm = () => {
@@ -32,7 +34,7 @@ export default function AuthPage({setUser}){
                 <h2 onClick={changeForm}>Click here to Login a existing user</h2>
                 
             </>}
-            <h2 onClick={loginGuest}>Click here to continue as a guest</h2>
+            <h2 className={styles.loginAsGuest} onClick={loginGuest}>Click here to continue as a guest</h2>
         </>
     )
 }
