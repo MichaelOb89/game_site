@@ -20,10 +20,19 @@ export default function RomList({socket, setSocket}){
         createRoom(lobbyName)
         setStartGame("waiting")
     }
+
+    const joinGame = (gameName) => {
+        setPlayer("O")
+        socket.emit('joinRoom', gameName)
+    }
     
     useEffect(()=>{
         const newSocket = io()
         newSocket.on('games', (games)=>{
+            setGames(games)
+        })
+        newSocket.on('games', (games)=>{
+            console.log(games)
             setGames(games)
         })
         console.log(games)
@@ -35,6 +44,17 @@ export default function RomList({socket, setSocket}){
             <>    
                 <input placeholder='Lobby Name' onChange={(evt)=>setLobbyName(evt.target.value)}/>
                 <button onClick={handleClick}>Create Lobby</button>
+                {games? 
+                games.map(game=>{
+                    return(
+                        <div>
+                            <h1>Lobby name:{game.game}</h1>
+                            <h2>Players:{game.numberOfPlayers}</h2>
+                            {game.numberOfPlayers<2?<button onClick={()=>joinGame(game.game)}>Join game</button>:""}
+                        </div>
+                    )
+                }):
+                ""}
             </>:
             startGame == "waiting" ?
             <h1>Waiting For opponent</h1>:

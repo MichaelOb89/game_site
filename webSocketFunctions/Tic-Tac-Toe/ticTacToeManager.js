@@ -1,19 +1,23 @@
 const games = []
 
-exports.sendGames = () => {
-    games.map((el)=>{
-        return{
-            players: el.players.length,
-        }
-    })
-}
+exports.getGames = () =>
+  games.map((g) => {
+    const { players, ...game } = g;
+    return {
+      ...game,
+      numberOfPlayers: players.length,
+    }
+  })
 
-exports.createGame = (player) => {
+exports.createGame = (player, lobbyName) => {
     const game = {
-        game: "Tic-Tac-Toe",
-        players: [player]
+        game: lobbyName,
+        players: [player],
     }
     games.push(game)
 }
 
-exports.games
+exports.joinGame = (player, gameName) => {
+  const foundGame = games.find(game=>game.game==gameName)
+  foundGame.players.push(player)
+}
