@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom'
 export default function RomList({socket, setSocket}){
     const [lobbyName, setLobbyName] = useState('')
     const [games, setGames] = useState(null)
+    const [currentGame, setCurrentGame] = useState(null)
     const [startGame, setStartGame] = useState("joinRoom")
     const [player, setPlayer] = useState(null)
     
@@ -24,6 +25,7 @@ export default function RomList({socket, setSocket}){
     const joinGame = (gameName) => {
         setPlayer("O")
         socket.emit('joinRoom', gameName)
+        setCurrentGame(gameName)
     }
     
     useEffect(()=>{
@@ -39,12 +41,16 @@ export default function RomList({socket, setSocket}){
         setSocket(newSocket)
     },[])
 
+    useEffect(()=>{
+        
+    }, [games])
+
     return(
         startGame == "joinRoom" ?
             <>    
                 <input placeholder='Lobby Name' onChange={(evt)=>setLobbyName(evt.target.value)}/>
                 <button onClick={handleClick}>Create Lobby</button>
-                {games? 
+                {games?
                 games.map(game=>{
                     return(
                         <div>

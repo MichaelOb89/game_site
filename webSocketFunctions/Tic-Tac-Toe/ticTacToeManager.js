@@ -13,6 +13,7 @@ exports.createGame = (player, lobbyName) => {
     const game = {
         game: lobbyName,
         players: [player],
+        board: []
     }
     games.push(game)
 }
