@@ -22,3 +22,7 @@ exports.joinGame = (player, gameName) => {
   const foundGame = games.find(game=>game.game==gameName)
   foundGame.players.push(player)
 }
+
+exports.startGame = () => {
+  
+}

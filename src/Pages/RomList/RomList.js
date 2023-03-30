@@ -17,6 +17,8 @@ export default function RomList({socket, setSocket}){
         setPlayer("X")
     }
 
+
+
     const handleClick = (evt) => {
         createRoom(lobbyName)
         setStartGame("waiting")
@@ -25,7 +27,11 @@ export default function RomList({socket, setSocket}){
     const joinGame = (gameName) => {
         setPlayer("O")
         socket.emit('joinRoom', gameName)
+        socket.on('games', (games)=>{
+            setGames(games)
+        })
         setCurrentGame(gameName)
+        setStartGame(true)
     }
     
     useEffect(()=>{
@@ -41,9 +47,6 @@ export default function RomList({socket, setSocket}){
         setSocket(newSocket)
     },[])
 
-    useEffect(()=>{
-        
-    }, [games])
 
     return(
         startGame == "joinRoom" ?
