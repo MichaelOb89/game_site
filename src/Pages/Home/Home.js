@@ -17,7 +17,7 @@ export default function Home({setUser}){
             <div className={styles.gamesBox}>
                 <div className={styles.gameList}>
                     <h2 className={styles.gameTxt1}>Game:</h2>
-                    <div className={styles.ticTacToe}><Link to={`/tictactoe`}>TicTacToe</Link></div>
+                    <div className={styles.ticTacToe}><Link to={`/tictactoe`} target="_blank">TicTacToe</Link></div>
                 </div>
             </div>
 
