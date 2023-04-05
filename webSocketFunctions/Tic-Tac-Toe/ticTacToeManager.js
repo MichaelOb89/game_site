@@ -13,6 +13,8 @@ exports.createGame = (player, lobbyName) => {
     const game = {
         game: lobbyName,
         players: [player],
+        board: [],
+        turn: true
     }
     games.push(game)
 }
@@ -21,3 +23,4 @@ exports.joinGame = (player, gameName) => {
   const foundGame = games.find(game=>game.game==gameName)
   foundGame.players.push(player)
 }
+

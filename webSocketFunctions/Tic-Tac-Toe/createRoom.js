@@ -1,6 +1,7 @@
 const {games, createGame} = require('./ticTacToeManager')
+const sendGames = require('./sendGames')
 
 module.exports = ({io, socket}) => (lobbyName) => {
-        socket.join(lobbyName)
         createGame(socket, lobbyName)
+        sendGames(io)
 }
