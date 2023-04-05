@@ -21,13 +21,20 @@ export default function Home({setUser}){
                 </div>
             </div>
 
+            <div className={styles.gamesBox}>
+                <div className={styles.gameList}>
+                    <h2 className={styles.gameTxt1}>Game:</h2>
+                    <div className={styles.ticTacToe}><Link to={`/rockpaperscissorslizardspock`} target="_blank">RockPaperScissorsLizardSpock</Link></div>
+                </div>
+            </div>
 
-            {/* <div className={styles.gamesList}>
-                <div><Link to={`/tictactoe`}>TicTacToe</Link></div>
-                <div><Link to={`/tictactoe`}>TicTacToe</Link></div>
-                <div><Link to={`/tictactoe`}>TicTacToe</Link></div>
+            <div className={styles.gamesBox}>
+                <div className={styles.gameList}>
+                    <h2 className={styles.gameTxt1}>Game:</h2>
+                    <div className={styles.ticTacToe}><Link to={`/rockpaperscissors`} target="_blank">OG RockPaperScissors</Link></div>
+                </div>
+            </div>
 
-            </div> */}
             
         </>
     )
