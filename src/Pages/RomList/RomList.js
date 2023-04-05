@@ -4,6 +4,10 @@ import TicTacToe from '../TicTacToe/TicTacToe'
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
+import styles from '../RomList/RomList.module.scss'
+
+import WaitingScreen from '../../Components/WaitingScreen/WaitingScreen'
+
 
 export default function RomList({socket, setSocket}){
     const [lobbyName, setLobbyName] = useState('')
@@ -59,13 +63,13 @@ export default function RomList({socket, setSocket}){
         startGame == "joinRoom" ?
             <>    
                 <input placeholder='Lobby Name' onChange={(evt)=>setLobbyName(evt.target.value)}/>
-                <button onClick={handleClick}>Create Lobby</button>
-                {games?
+                <button className={styles.createLobby} onClick={handleClick}>Create Lobby</button>
+                {games? 
                 games.map(game=>{
                     return(
-                        <div key={game.game}>
-                            <h1>Lobby name:{game.game}</h1>
-                            <h2>Players:{game.numberOfPlayers}</h2>
+                        <div>
+                            <h1 className={styles.lobbyName}>Lobby name:{game.game}</h1>
+                            <h2 className={styles.playersName}>Players:{game.numberOfPlayers}</h2>
                             {game.numberOfPlayers<2?<button onClick={()=>joinGame(game.game)}>Join game</button>:""}
                         </div>
                     )
@@ -73,7 +77,11 @@ export default function RomList({socket, setSocket}){
                 ""}
             </>:
             startGame == "waiting" ?
-            <h1>Waiting For opponent</h1>:
+            <WaitingScreen />
+            // <span className={styles.loadingScreen}>
+            //     <h1 className={styles.waitingForOpp}>Waiting For Opponent</h1>
+            // </span>
+            :
             <TicTacToe player={player}/>
     )
 }
