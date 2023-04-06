@@ -1,0 +1,140 @@
+.homeText{
+    color: #45f3ff;
+    text-align: center;
+}
+
+.logoutBtn{
+    // position: absolute;
+    // top: 5%;
+    // left: 10;
+    // right: 10%;
+    cursor: pointer;
+    transition:all .3s;
+    &:hover{
+        background: #45f3ff;
+    }
+}
+
+.gamesBox{
+    position: relative;
+    width: 380px;
+    height: 420px;
+    background: #1c1c1c;
+    border-radius: 8px;
+    overflow: hidden;
+    &:before{
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 380px;
+        height: 420px;
+        background: linear-gradient(0deg, transparent, #45f3ff, #45f3ff);
+        transform-origin: bottom right;
+        animation: animate 6s linear infinite;
+    }
+    &:after{ 
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 380px;
+        height: 420px;
+        background: linear-gradient(0deg, transparent, #45f3ff, #45f3ff);
+        transform-origin: bottom right;
+        animation: animate 6s linear infinite;
+        animation-delay: -3s
+      }
+      @keyframes animate{
+        0%{
+          transform: rotate(0deg);
+        }
+        100%{
+          transform: rotate(360deg);
+        }
+      }
+}
+
+.gameList{
+    position:absolute;
+    inset: 2px;
+    // background: #28292d;
+    border-radius: 8px;
+    z-index: 10;
+    padding: 50px 40px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    transition: all .8s;
+    // width: 380px;
+    // height: 420px;
+    overflow: hidden;
+
+        .gameTxt1{
+            color: #45f3ff;
+            font-weight: 400;
+            text-align: center;
+            letter-spacing: 0.1em;
+            position: absolute;
+            top: 0;
+            left: 10;
+        }
+}
+
+a{
+    color: ghostwhite;
+    background: transparent;
+    transition:all .7s;
+    &:hover{
+        color: #45f3ff;
+    }
+}
+
+
+
+
+
+
+
+
+// .gamesList{
+//     // color: ghostwhite;
+//     // flex-wrap: wrap;
+//     // background: white;
+//     display: flex;
+//     flex-wrap: nowrap;
+//     flex-direction: column;
+//     justify-content: center;
+//     align-items: center;
+//     transition:all .8s;
+//     // &:hover{
+//     //     background: #45f3ff;
+//     // }
+
+//     position: relative;
+//     width: 380px;
+//     height: 420px;
+//     background: #1c1c1c;
+//     border-radius: 8px;
+//     overflow: hidden;
+
+// }
+
+// .gamesList > div{
+//     width: 100px;
+//     margin: 10px;
+//     text-align: center;
+//     line-height: 75px;
+//     background-color: black;
+// }
+
+// a{
+//     color: ghostwhite;
+//     background: transparent;
+//     transition:all .3s;
+//     &:hover{
+//         background: green;
+//     }
+// }

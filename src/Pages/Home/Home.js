@@ -1,0 +1,41 @@
+import { logOut } from "../../utilities/users-service"
+import { Link } from "react-router-dom"
+
+import styles from '../Home/Home.module.scss'
+
+export default function Home({setUser}){
+    function handleLogOut(){
+        logOut()
+        setUser(null)
+    }
+
+    return(
+        <>
+            <h1 className={styles.homeText}>Home Page</h1>
+            <button className={styles.logoutBtn} onClick={handleLogOut}>Log out</button>
+
+            <div className={styles.gamesBox}>
+                <div className={styles.gameList}>
+                    <h2 className={styles.gameTxt1}>Game:</h2>
+                    <div className={styles.ticTacToe}><Link to={`/tictactoe`} target="_blank">TicTacToe</Link></div>
+                </div>
+            </div>
+
+            <div className={styles.gamesBox}>
+                <div className={styles.gameList}>
+                    <h2 className={styles.gameTxt1}>Game:</h2>
+                    <div className={styles.ticTacToe}><Link to={`/rockpaperscissorslizardspock`} target="_blank">RockPaperScissorsLizardSpock</Link></div>
+                </div>
+            </div>
+
+            <div className={styles.gamesBox}>
+                <div className={styles.gameList}>
+                    <h2 className={styles.gameTxt1}>Game:</h2>
+                    <div className={styles.ticTacToe}><Link to={`/rockpaperscissors`} target="_blank">OG RockPaperScissors</Link></div>
+                </div>
+            </div>
+
+            
+        </>
+    )
+}
