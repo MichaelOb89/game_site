@@ -12,12 +12,14 @@ import WaitingScreen from '../../Components/WaitingScreen/WaitingScreen'
 export default function RomList({socket, setSocket}){
     const [lobbyName, setLobbyName] = useState('')
     const [games, setGames] = useState(null)
+    const [currentGame, setCurrentGame] = useState(null)
     const [startGame, setStartGame] = useState("joinRoom")
     const [player, setPlayer] = useState(null)
     
     const createRoom = (lobbyName) => {
         socket.emit('createRoom', lobbyName)
         setPlayer("X")
+        setCurrentGame(lobbyName)
     }
 
     const handleClick = (evt) => {
@@ -28,6 +30,11 @@ export default function RomList({socket, setSocket}){
     const joinGame = (gameName) => {
         setPlayer("O")
         socket.emit('joinRoom', gameName)
+        socket.on('games', (games)=>{
+            setGames(games)
+        })
+        setCurrentGame(gameName)
+        setStartGame(true)
     }
     
     useEffect(()=>{
@@ -36,12 +43,20 @@ export default function RomList({socket, setSocket}){
             setGames(games)
         })
         newSocket.on('games', (games)=>{
-            console.log(games)
             setGames(games)
         })
         console.log(games)
         setSocket(newSocket)
     },[])
+
+    useEffect(()=>{
+        if(currentGame && games){
+            const foundGame = games.find(game=>game.game==currentGame)
+            if(foundGame.numberOfPlayers==2){
+                setStartGame(true)
+            }
+        }
+    }, [games])
 
     return(
         startGame == "joinRoom" ?
@@ -66,6 +81,6 @@ export default function RomList({socket, setSocket}){
             //     <h1 className={styles.waitingForOpp}>Waiting For Opponent</h1>
             // </span>
             :
-            <TicTacToe player={player}/>
+            <TicTacToe socket={socket} currentGame={currentGame} player={player}/>
     )
 }

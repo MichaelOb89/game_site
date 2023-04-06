@@ -12,6 +12,7 @@ const PORT = process.env.PORT || 3001
 const createRoom = require('./webSocketFunctions/Tic-Tac-Toe/createRoom')
 const sendGames = require('./webSocketFunctions/Tic-Tac-Toe/sendGames')
 const joinRoom = require('./webSocketFunctions/Tic-Tac-Toe/joinRoom')
+const move = require('./webSocketFunctions/Tic-Tac-Toe/move')
 
 const app = express()
 const httpServer = createServer(app);
@@ -40,6 +41,7 @@ io.on("connection", (socket) => {
     sendGames(socket)
     socket.on('createRoom', createRoom({io, socket}))
     socket.on('joinRoom', joinRoom({io, socket}))
+    socket.on('move', move({io, socket}))
 });
 
 httpServer.listen(PORT, () => {

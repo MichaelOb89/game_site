@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import styles from "./TicTacToe.module.scss"
 import Square from "./Components/Square"
 
-export default function TicTacToe({socket, player}){
+export default function TicTacToe({socket, player, currentGame}){
     const [turn, setTurn] = useState(true)
     const [board, setBoard] = useState(["","","","","","","","","",])
     
@@ -29,19 +29,25 @@ export default function TicTacToe({socket, player}){
         checkWinner()
     },[board])
 
+    socket.on('moveMade', (games)=>{
+        const foundGame = games.find(game=>game.game == currentGame)
+        setBoard(foundGame.board)
+        setTurn(foundGame.turn)
+    })
+
     return(
         <>
             <h1>Tic Tac Toe</h1>
             <div id={styles.wrapper}>
-                <Square player={player} socket={socket} board={board} setBoard={setBoard} turn={turn} setTurn={setTurn} squareNumber={1} style={styles.one}/>
-                <Square player={player} socket={socket} board={board} setBoard={setBoard} turn={turn} setTurn={setTurn} squareNumber={2} style={styles.two}/>
-                <Square player={player} socket={socket} board={board} setBoard={setBoard} turn={turn} setTurn={setTurn} squareNumber={3} style={styles.three}/>
-                <Square player={player} socket={socket} board={board} setBoard={setBoard} turn={turn} setTurn={setTurn} squareNumber={4} style={styles.four}/>
-                <Square player={player} socket={socket} board={board} setBoard={setBoard} turn={turn} setTurn={setTurn} squareNumber={5} style={styles.five}/>
-                <Square player={player} socket={socket} board={board} setBoard={setBoard} turn={turn} setTurn={setTurn} squareNumber={6} style={styles.six}/>
-                <Square player={player} socket={socket} board={board} setBoard={setBoard} turn={turn} setTurn={setTurn} squareNumber={7} style={styles.seven}/>
-                <Square player={player} socket={socket} board={board} setBoard={setBoard} turn={turn} setTurn={setTurn} squareNumber={8} style={styles.eight}/>
-                <Square player={player} socket={socket} board={board} setBoard={setBoard} turn={turn} setTurn={setTurn} squareNumber={9} style={styles.nine}/>
+                <Square currentGame={currentGame} player={player} socket={socket} board={board} setBoard={setBoard} turn={turn} setTurn={setTurn} squareNumber={1} style={styles.one}/>
+                <Square currentGame={currentGame} player={player} socket={socket} board={board} setBoard={setBoard} turn={turn} setTurn={setTurn} squareNumber={2} style={styles.two}/>
+                <Square currentGame={currentGame} player={player} socket={socket} board={board} setBoard={setBoard} turn={turn} setTurn={setTurn} squareNumber={3} style={styles.three}/>
+                <Square currentGame={currentGame} player={player} socket={socket} board={board} setBoard={setBoard} turn={turn} setTurn={setTurn} squareNumber={4} style={styles.four}/>
+                <Square currentGame={currentGame} player={player} socket={socket} board={board} setBoard={setBoard} turn={turn} setTurn={setTurn} squareNumber={5} style={styles.five}/>
+                <Square currentGame={currentGame} player={player} socket={socket} board={board} setBoard={setBoard} turn={turn} setTurn={setTurn} squareNumber={6} style={styles.six}/>
+                <Square currentGame={currentGame} player={player} socket={socket} board={board} setBoard={setBoard} turn={turn} setTurn={setTurn} squareNumber={7} style={styles.seven}/>
+                <Square currentGame={currentGame} player={player} socket={socket} board={board} setBoard={setBoard} turn={turn} setTurn={setTurn} squareNumber={8} style={styles.eight}/>
+                <Square currentGame={currentGame} player={player} socket={socket} board={board} setBoard={setBoard} turn={turn} setTurn={setTurn} squareNumber={9} style={styles.nine}/>
             </div>
             <h2>Score</h2>
             <h3 id={styles.x}>X has won 0 games</h3>
