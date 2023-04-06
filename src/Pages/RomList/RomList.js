@@ -43,7 +43,6 @@ export default function RomList({socket, setSocket}){
             setGames(games)
         })
         newSocket.on('games', (games)=>{
-            console.log(games)
             setGames(games)
         })
         console.log(games)
@@ -82,6 +81,6 @@ export default function RomList({socket, setSocket}){
             //     <h1 className={styles.waitingForOpp}>Waiting For Opponent</h1>
             // </span>
             :
-            <TicTacToe player={player}/>
+            <TicTacToe socket={socket} currentGame={currentGame} player={player}/>
     )
 }
