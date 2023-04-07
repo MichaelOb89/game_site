@@ -1,21 +1,32 @@
-h1 {
-    color: rgb(30, 55, 131);
+@import url('https://fonts.cdnfonts.com/css/press-start-2p');
+
+.tictacTxt{
+    color: #45f3ff;
     text-align: center;
+    font-family: 'Press Start 2P', sans-serif;
 }
 
 #wrapper {
     display: grid;
     grid-template-columns: repeat(3, auto);
-    grid-template-rows: repeat(3, 25vw);
+    grid-template-rows: repeat(3, 10vw);
 }
 
 .square {
-    border-color: black;
+    // border-color: black;
+    border-color: white;
     border-style: solid;
-    /* border-radius: 100px; */
+    // border-radius: 100px;
     text-align: center;
     vertical-align: center;
     font-size: 100px;
+    width: 200px;
+
+    position: relative;
+    top: 50%;
+    // left: 0;
+    // bottom: 0;
+    // right: 0;
 }
 
 #one {
