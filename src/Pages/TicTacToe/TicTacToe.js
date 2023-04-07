@@ -37,7 +37,7 @@ export default function TicTacToe({socket, player, currentGame}){
 
     return(
         <>
-            <h1>Tic Tac Toe</h1>
+            <h1 className={styles.tictacTxt}>Tic Tac Toe</h1>
             <div id={styles.wrapper}>
                 <Square currentGame={currentGame} player={player} socket={socket} board={board} setBoard={setBoard} turn={turn} setTurn={setTurn} squareNumber={1} style={styles.one}/>
                 <Square currentGame={currentGame} player={player} socket={socket} board={board} setBoard={setBoard} turn={turn} setTurn={setTurn} squareNumber={2} style={styles.two}/>
