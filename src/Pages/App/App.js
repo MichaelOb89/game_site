@@ -18,7 +18,7 @@ export default function App(){
                 <Route path="/" element={<Home setUser={setUser}/>}/>
                 <Route path="/tictactoe" element={<RomList socket={socket} setSocket={setSocket}/>}/>
                 <Route path="/tictactoe/:roomId" element={<TicTacToe socket={socket}/>}/>
-                <Route path="/rockpaperscissorslizardspock" element={<RockPaperScissorsLizardSpock />}/>
+                <Route path="/rockpaperscissorslizardspock" element={<RockPaperScissorsLizardSpock socket={socket} setSocket={setSocket}/>}/>
                 <Route path="/rockpaperscissors" element={<RockPaperScissors />}/>
             </Routes>:
             <AuthPage setUser={setUser}/>}

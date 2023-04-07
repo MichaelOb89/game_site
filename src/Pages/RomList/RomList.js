@@ -2,7 +2,6 @@ import { useState } from 'react'
 import io from 'socket.io-client'
 import TicTacToe from '../TicTacToe/TicTacToe'
 import { useEffect } from 'react'
-import { Link } from 'react-router-dom'
 
 import styles from '../RomList/RomList.module.scss'
 
