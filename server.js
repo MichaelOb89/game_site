@@ -38,10 +38,23 @@ app.get('*', (req, res) => {
 
 io.on("connection", (socket) => {
     console.log(`New socket ${socket.id} connected`)
-    sendGames(socket)
-    socket.on('createRoom', createRoom({io, socket}))
-    socket.on('joinRoom', joinRoom({io, socket}))
-    socket.on('move', move({io, socket}))
+    socket.emit('connected', 'Connection estabilished')
+    socket.on('gameSelect', (game)=>{
+        switch(game){
+            case "RPSLS":
+                console.log("You're Playing Rock Paper Scissors Lizard Spock")
+                break
+            default:
+                sendGames(socket)
+                socket.on('createRoom', createRoom({io, socket}))
+                socket.on('joinRoom', joinRoom({io, socket}))
+                socket.on('move', move({io, socket}))
+        }
+    })
+    // sendGames(socket)
+    // socket.on('createRoom', createRoom({io, socket}))
+    // socket.on('joinRoom', joinRoom({io, socket}))
+    // socket.on('move', move({io, socket}))
 });
 
 httpServer.listen(PORT, () => {

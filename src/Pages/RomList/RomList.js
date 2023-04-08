@@ -38,6 +38,9 @@ export default function RomList({socket, setSocket}){
     
     useEffect(()=>{
         const newSocket = io()
+        newSocket.on('connected', ()=>{
+            newSocket.emit('gameSelect', "TicTacToe")
+        })
         newSocket.on('games', (games)=>{
             setGames(games)
         })
