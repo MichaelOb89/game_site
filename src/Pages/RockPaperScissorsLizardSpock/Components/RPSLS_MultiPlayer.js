@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { io } from "socket.io-client";
 import styles from '../RockPaperScissorsLizardSpock.module.scss'
 
 
@@ -9,16 +8,8 @@ export default function RPSLS_MultiPlayer({socket, setSocket}){
     const [userSelection, setUserSelection] = useState(null)
     const [opponentSelection, setOpponentSelection] = useState("Waiting for Opponent to Play")
     
-    useEffect(()=>{
-        const newSocket = io()
-        newSocket.on('connected',()=>{
-            newSocket.emit('gameSelect', "RPSLS")
-        })
-        setSocket(newSocket)
-    },[])
-
-    const clickHandler = (evt) => {
-        setUserSelection(evt)
+    const clickHandler = async () => {
+      
     }
 
     return(

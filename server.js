@@ -8,11 +8,14 @@ const logger = require('morgan')
 const path = require('path')
 const PORT = process.env.PORT || 3001
 
-//===========GAME MANAGER FUNCTIONS=============
+//===========GAME MANAGER FUNCTIONS FOR TIC-TAC-TOE=============
 const createRoom = require('./webSocketFunctions/Tic-Tac-Toe/createRoom')
 const sendGames = require('./webSocketFunctions/Tic-Tac-Toe/sendGames')
 const joinRoom = require('./webSocketFunctions/Tic-Tac-Toe/joinRoom')
 const move = require('./webSocketFunctions/Tic-Tac-Toe/move')
+//===========GAME MANAGER FUNCTIONS FOR RPS=============
+const createRPSRoom = require('./webSocketFunctions/Rock-Paper-Scissors/createRoom')
+const sendRPSGames = require('./webSocketFunctions/Rock-Paper-Scissors/sendGames')
 
 const app = express()
 const httpServer = createServer(app);
@@ -42,13 +45,15 @@ io.on("connection", (socket) => {
     socket.on('gameSelect', (game)=>{
         switch(game){
             case "RPSLS":
-                console.log("You're Playing Rock Paper Scissors Lizard Spock")
+                sendRPSGames(socket)
+                socket.on('createRoom', createRPSRoom({io, socket}))
                 break
             default:
                 sendGames(socket)
                 socket.on('createRoom', createRoom({io, socket}))
                 socket.on('joinRoom', joinRoom({io, socket}))
                 socket.on('move', move({io, socket}))
+                break
         }
     })
     // sendGames(socket)

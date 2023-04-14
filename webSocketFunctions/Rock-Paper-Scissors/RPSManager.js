@@ -2,18 +2,19 @@ const games = []
 
 exports.games = games
 
-exports.getGames() = () => {
+exports.getGames = () => 
     games.map((game)=>{
         return{
             ...game,
             numberOfPlayers: game.players.length
         }
     })
-}
+
 
 exports.createGame = (player, lobbyName) => {
     const game = {
         name: lobbyName,
+        players: [player],
         player1: player,
         player2: null,
         p1Wins: 0,
