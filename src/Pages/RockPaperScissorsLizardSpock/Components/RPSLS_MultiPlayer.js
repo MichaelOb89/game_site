@@ -2,14 +2,33 @@ import { useState, useEffect } from "react";
 import styles from '../RockPaperScissorsLizardSpock.module.scss'
 
 
-export default function RPSLS_MultiPlayer({socket, setSocket}){
+export default function RPSLS_MultiPlayer({socket, setSocket, player, currentGame}){
     
     const selection = ["🧱", "📰", "✂️", "🦎", "🖖"]
     const [userSelection, setUserSelection] = useState(null)
     const [opponentSelection, setOpponentSelection] = useState("Waiting for Opponent to Play")
     
-    const clickHandler = async () => {
-      
+    const clickHandler =  (value) => {
+      console.log(value)
+      if(socket){
+        switch(player){
+          case "1":
+            socket.emit('play', {
+              play: value,
+              game: currentGame,
+              player: 1
+            })
+          case "2":
+            socket.emit('play',{
+              play: value,
+              game: currentGame,
+              player: 2
+            })
+        }
+        setUserSelection(value)
+      }else{
+        alert("Connection Error!")
+      }
     }
 
     return(

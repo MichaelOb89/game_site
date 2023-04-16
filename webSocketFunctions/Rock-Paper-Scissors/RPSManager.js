@@ -28,10 +28,15 @@ exports.createGame = (player, lobbyName) => {
 
 exports.joinGame =(player, gameName) => {
     const foundGame = games.find(game=>game.name==gameName)
-    foundGame.player2 = player
+    foundGame.players.push(player)
 }
 
 exports.play = (updatedGame) => {
-    const foundGame = games.find(game=>game.name==updatedGame.name)
-    //Game logic and response here!
+    const foundGame = games.find(game=>game.name==updatedGame.game)
+    if(updatedGame.player == 1){
+        foundGame.p1CurrentPlay = updatedGame.play
+    }else if(updatedGame.player == 2){
+        foundGame.p2CurrentPlay = updatedGame.play
+    }
+    console.log(foundGame)
 }

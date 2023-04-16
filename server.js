@@ -16,6 +16,8 @@ const move = require('./webSocketFunctions/Tic-Tac-Toe/move')
 //===========GAME MANAGER FUNCTIONS FOR RPS=============
 const createRPSRoom = require('./webSocketFunctions/Rock-Paper-Scissors/createRoom')
 const sendRPSGames = require('./webSocketFunctions/Rock-Paper-Scissors/sendGames')
+const joinRPSRoom = require('./webSocketFunctions/Rock-Paper-Scissors/joinRoom')
+const playRPS = require('./webSocketFunctions/Rock-Paper-Scissors/play')
 
 const app = express()
 const httpServer = createServer(app);
@@ -47,6 +49,8 @@ io.on("connection", (socket) => {
             case "RPSLS":
                 sendRPSGames(socket)
                 socket.on('createRoom', createRPSRoom({io, socket}))
+                socket.on('joinRoom', joinRPSRoom({io, socket}))
+                socket.on('play', playRPS({io, socket}))
                 break
             default:
                 sendGames(socket)

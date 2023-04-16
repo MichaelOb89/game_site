@@ -79,9 +79,6 @@ export default function RomList({socket, setSocket}){
             </>:
             startGame == "waiting" ?
             <WaitingScreen />
-            // <span className={styles.loadingScreen}>
-            //     <h1 className={styles.waitingForOpp}>Waiting For Opponent</h1>
-            // </span>
             :
             <TicTacToe socket={socket} currentGame={currentGame} player={player}/>
     )

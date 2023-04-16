@@ -41,6 +41,7 @@ export default function RPSLS_RomList({socket, setSocket}){
         })
         newSocket.on('games', (games)=>{
             setGames(games)
+            console.log(games)
         })
         console.log(games)
         setSocket(newSocket)
@@ -48,7 +49,8 @@ export default function RPSLS_RomList({socket, setSocket}){
 
     useEffect(()=>{
         if(currentGame && games){
-            const foundGame = games.find(game=>game.game==currentGame)
+            const foundGame = games.find(game=>game.name==currentGame)
+            console.log(foundGame)
             if(foundGame.numberOfPlayers==2){
                 setStartGame(true)
             }
@@ -63,10 +65,10 @@ export default function RPSLS_RomList({socket, setSocket}){
                 {games? 
                 games.map(game=>{
                     return(
-                        <div>
-                            <h1 className={styles.lobbyName}>Lobby name:{game.game}</h1>
+                        <div key={game.name}>
+                            <h1 className={styles.lobbyName}>Lobby name:{game.name}</h1>
                             <h2 className={styles.playersName}>Players:{game.numberOfPlayers}</h2>
-                            {game.numberOfPlayers<2?<button onClick={()=>joinGame(game.game)}>Join game</button>:""}
+                            {game.numberOfPlayers<2?<button onClick={()=>joinGame(game.name)}>Join game</button>:""}
                         </div>
                     )
                 }):
@@ -74,9 +76,6 @@ export default function RPSLS_RomList({socket, setSocket}){
             </>:
             startGame == "waiting" ?
             <WaitingScreen />
-            // <span className={styles.loadingScreen}>
-            //     <h1 className={styles.waitingForOpp}>Waiting For Opponent</h1>
-            // </span>
             :
             <RPSLS_MultiPlayer socket={socket} currentGame={currentGame} player={player}/>
     )
