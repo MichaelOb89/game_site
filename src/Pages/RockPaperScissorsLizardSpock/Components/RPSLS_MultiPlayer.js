@@ -18,12 +18,14 @@ export default function RPSLS_MultiPlayer({socket, setSocket, player, currentGam
               game: currentGame,
               player: 1
             })
+            break
           case "2":
             socket.emit('play',{
               play: value,
               game: currentGame,
               player: 2
             })
+            break
         }
         setUserSelection(value)
       }else{

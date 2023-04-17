@@ -38,5 +38,7 @@ exports.play = (updatedGame) => {
     }else if(updatedGame.player == 2){
         foundGame.p2CurrentPlay = updatedGame.play
     }
-    console.log(foundGame)
+    if(foundGame.p2CurrentPlay && foundGame.p1CurrentPlay){
+        //check for game results here
+    }
 }
