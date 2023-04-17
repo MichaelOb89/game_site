@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import RPSLS_SinglePlayer from './Components/RPSLS_SinglePlayer';
-import RPSLS_MultiPlayer from './Components/RPSLS_MultiPlayer';
-import styles from '../RockPaperScissorsLizardSpock/RockPaperScissorsLizardSpock.module.scss';
+import RPSLS_RomList from './Components/RPSLS_RoomList';
+
 
 export default function RockPaperScissorsLizardSpock({socket, setSocket}){
     const [multiplayer, setMultiplayer] = useState('none')
@@ -15,7 +15,7 @@ export default function RockPaperScissorsLizardSpock({socket, setSocket}){
             <button onClick={()=>setMultiplayer('single')}>Single Player</button><button onClick={()=>setMultiplayer('multiplayer')}>Multiplayer</button>
           </>:
           multiplayer=='single'?
-          <RPSLS_SinglePlayer/>:<RPSLS_MultiPlayer socket={socket} setSocket={setSocket}/>}
+          <RPSLS_SinglePlayer/>:<RPSLS_RomList socket={socket} setSocket={setSocket}/>}
         </>
       );
 
