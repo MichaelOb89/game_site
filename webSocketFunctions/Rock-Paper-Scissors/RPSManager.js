@@ -2,6 +2,43 @@ const games = []
 
 exports.games = games
 
+const checkResults = (game) => {
+    switch (game.p1CurrentPlay + game.p2CurrentPlay) {
+        case "✂️📰":
+        case "🧱✂️":
+        case "📰🧱":
+        case "🦎📰":
+        case "🖖✂️":
+        case "🧱🦎":
+        case "📰🖖":
+        case "🖖🧱":
+        case "✂️🦎":
+        case "🦎🖖":
+          game.p1Wins++
+          break;
+        case "📰✂️":
+        case "✂️🧱":
+        case "🧱📰":
+        case "📰🦎":
+        case "✂️🖖":
+        case "🦎🧱":
+        case "🖖📰":
+        case "🧱🖖":
+        case "🦎✂️":
+        case "🖖🦎":
+          game.p2Wins++
+          break;
+        case "🧱🧱":
+        case "📰📰":
+        case "✂️✂️":
+        case "🦎🦎":
+        case "🖖🖖":
+          console.log("DraW")
+          break;
+      }
+}
+
+
 exports.getGames = () => 
     games.map((g)=>{
         const {players, ...game} = g
@@ -40,5 +77,6 @@ exports.play = (updatedGame) => {
     }
     if(foundGame.p2CurrentPlay && foundGame.p1CurrentPlay){
         //check for game results here
+        checkResults(foundGame)
+        }
     }
-}

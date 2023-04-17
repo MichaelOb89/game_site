@@ -13,6 +13,7 @@ export default function RPSLS_RomList({socket, setSocket}){
     const [startGame, setStartGame] = useState("joinRoom")
     const [player, setPlayer] = useState(null)
     
+    
     const createRoom = (lobbyName) => {
         socket.emit('createRoom', lobbyName)
         setPlayer("1")
@@ -44,6 +45,10 @@ export default function RPSLS_RomList({socket, setSocket}){
             console.log(games)
         })
         console.log(games)
+        newSocket.on('finishRound', (results)=>{
+            const result = games.find(game=>game.name==results.name)
+            console.log(result)
+        })
         setSocket(newSocket)
     },[])
 
