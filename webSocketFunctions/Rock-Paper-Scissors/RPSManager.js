@@ -15,6 +15,7 @@ const checkResults = (game) => {
         case "✂️🦎":
         case "🦎🖖":
           game.p1Wins++
+          game.roundWinner = 1
           break;
         case "📰✂️":
         case "✂️🧱":
@@ -27,13 +28,15 @@ const checkResults = (game) => {
         case "🦎✂️":
         case "🖖🦎":
           game.p2Wins++
+          game.roundWinner = 2
           break;
         case "🧱🧱":
         case "📰📰":
         case "✂️✂️":
         case "🦎🦎":
         case "🖖🖖":
-          console.log("DraW")
+          game.roundWinner = "draw"
+          //console.log("DraW")
           break;
       }
 }
@@ -58,9 +61,28 @@ exports.createGame = (player, lobbyName) => {
         p1Wins: 0,
         p2Wins: 0,
         p1CurrentPlay: null,
-        p2CurrentPlay: null
+        p2CurrentPlay: null,
+        roundWinner: null,
+        p1Restart: null,
+        p2Restart: null
     }
     games.push(game)
+}
+
+exports.restart = (game) => {
+    const foundGame = games.find(g=>g.name==game.game)
+    if(game.player==1){
+        foundGame.p1Restart = true
+    }else{
+        foundGame.p2Restart = true
+    }
+    if(foundGame.p1Restart && foundGame.p2Restart){
+        foundGame.p1CurrentPlay = null
+        foundGame.p2CurrentPlay = null
+        foundGame.roundWinner = null
+        foundGame.p1Restart = null
+        foundGame.p2Restart = null
+    }
 }
 
 exports.joinGame =(player, gameName) => {
