@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import styles from '../RockPaperScissorsLizardSpock.module.scss'
 
 
-export default function RPSLS_MultiPlayer({socket, roundResult, player, currentGame, games}){
+export default function RPSLS_MultiPlayer({socket, roundResult, player, currentGame, games, setRoundResult}){
     
     const selection = ["🧱", "📰", "✂️", "🦎", "🖖"]
     const [userSelection, setUserSelection] = useState(null)
@@ -14,6 +14,7 @@ export default function RPSLS_MultiPlayer({socket, roundResult, player, currentG
       socket.on('restart',()=>{
         setUserSelection(null)
         setRestart(null)
+        setRoundResult(null)
       })
     }, games)
 

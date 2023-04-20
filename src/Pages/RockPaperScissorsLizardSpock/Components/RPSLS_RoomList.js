@@ -59,7 +59,6 @@ export default function RPSLS_RomList({socket, setSocket}){
             setRoundResult(results)
         })
         :console.log(null)
-
         }
     }, [games])
 
@@ -83,6 +82,6 @@ export default function RPSLS_RomList({socket, setSocket}){
             startGame == "waiting" ?
             <WaitingScreen />
             :
-            <RPSLS_MultiPlayer games={games} roundResult={roundResult} socket={socket} currentGame={currentGame} player={player}/>
+            <RPSLS_MultiPlayer games={games} setRoundResult={setRoundResult} roundResult={roundResult} socket={socket} currentGame={currentGame} player={player}/>
     )
 }

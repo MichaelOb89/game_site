@@ -71,6 +71,7 @@ exports.createGame = (player, lobbyName) => {
 
 exports.restart = (game) => {
     const foundGame = games.find(g=>g.name==game.game)
+    //console.log(game)
     if(game.player==1){
         foundGame.p1Restart = true
     }else{
@@ -80,8 +81,9 @@ exports.restart = (game) => {
         foundGame.p1CurrentPlay = null
         foundGame.p2CurrentPlay = null
         foundGame.roundWinner = null
-        foundGame.p1Restart = null
-        foundGame.p2Restart = null
+        //foundGame.p1Restart = null
+        //foundGame.p2Restart = null
+
     }
 }
 
