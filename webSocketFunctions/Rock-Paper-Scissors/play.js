@@ -8,6 +8,6 @@ module.exports =({io, socket}) => (updatedGame) => {
     const { players, ...game } = foundGame
     if(foundGame.p1CurrentPlay && foundGame.p2CurrentPlay){
         io.emit("finishRound", {...game})
-        console.log(game)
+        //console.log(game)
     }
 }

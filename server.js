@@ -18,6 +18,7 @@ const createRPSRoom = require('./webSocketFunctions/Rock-Paper-Scissors/createRo
 const sendRPSGames = require('./webSocketFunctions/Rock-Paper-Scissors/sendGames')
 const joinRPSRoom = require('./webSocketFunctions/Rock-Paper-Scissors/joinRoom')
 const playRPS = require('./webSocketFunctions/Rock-Paper-Scissors/play')
+const restartRPS = require('./webSocketFunctions/Rock-Paper-Scissors/restart')
 
 const app = express()
 const httpServer = createServer(app);
@@ -51,6 +52,7 @@ io.on("connection", (socket) => {
                 socket.on('createRoom', createRPSRoom({io, socket}))
                 socket.on('joinRoom', joinRPSRoom({io, socket}))
                 socket.on('play', playRPS({io, socket}))
+                socket.on('restart', restartRPS({io, socket}))
                 break
             default:
                 sendGames(socket)

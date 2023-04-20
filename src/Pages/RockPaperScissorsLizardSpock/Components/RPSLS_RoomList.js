@@ -12,7 +12,8 @@ export default function RPSLS_RomList({socket, setSocket}){
     const [currentGame, setCurrentGame] = useState(null)
     const [startGame, setStartGame] = useState("joinRoom")
     const [player, setPlayer] = useState(null)
-    
+    const [roundResult, setRoundResult] = useState(null)
+
     
     const createRoom = (lobbyName) => {
         socket.emit('createRoom', lobbyName)
@@ -42,12 +43,6 @@ export default function RPSLS_RomList({socket, setSocket}){
         })
         newSocket.on('games', (games)=>{
             setGames(games)
-            console.log(games)
-        })
-        console.log(games)
-        newSocket.on('finishRound', (results)=>{
-            const result = games.find(game=>game.name==results.name)
-            console.log(result)
         })
         setSocket(newSocket)
     },[])
@@ -55,10 +50,15 @@ export default function RPSLS_RomList({socket, setSocket}){
     useEffect(()=>{
         if(currentGame && games){
             const foundGame = games.find(game=>game.name==currentGame)
-            console.log(foundGame)
             if(foundGame.numberOfPlayers==2){
                 setStartGame(true)
             }
+        }
+        {socket?
+        socket.on('finishRound', (results)=>{
+            setRoundResult(results)
+        })
+        :console.log(null)
         }
     }, [games])
 
@@ -82,6 +82,6 @@ export default function RPSLS_RomList({socket, setSocket}){
             startGame == "waiting" ?
             <WaitingScreen />
             :
-            <RPSLS_MultiPlayer socket={socket} currentGame={currentGame} player={player}/>
+            <RPSLS_MultiPlayer games={games} setRoundResult={setRoundResult} roundResult={roundResult} socket={socket} currentGame={currentGame} player={player}/>
     )
 }
