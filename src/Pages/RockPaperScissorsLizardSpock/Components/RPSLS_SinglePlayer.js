@@ -59,7 +59,7 @@ export default function RPSLS_SinglePlayer(){
 
       return (
           <>
-              <h1 className={styles.h1Txt}>Rock Paper Scissors Lizard Spock</h1>
+            <h1 className={styles.h1Txt}>Rock Paper Scissors Lizard Spock</h1>
             <div>
               <div className="container">
                 <div className="section">
