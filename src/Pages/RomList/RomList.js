@@ -44,10 +44,7 @@ export default function RomList({socket, setSocket}){
         newSocket.on('games', (games)=>{
             setGames(games)
         })
-        newSocket.on('games', (games)=>{
-            setGames(games)
-        })
-        console.log(games)
+        //console.log(games)
         setSocket(newSocket)
     },[])
 
