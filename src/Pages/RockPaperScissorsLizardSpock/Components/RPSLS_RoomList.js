@@ -58,7 +58,7 @@ export default function RPSLS_RomList({socket, setSocket}){
         socket.on('finishRound', (results)=>{
             setRoundResult(results)
         })
-        :console.log(null)
+        :''
         }
     }, [games])
 
