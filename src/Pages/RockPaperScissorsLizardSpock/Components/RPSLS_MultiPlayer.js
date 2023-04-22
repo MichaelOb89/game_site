@@ -9,7 +9,7 @@ export default function RPSLS_MultiPlayer({socket, setSocket, player, currentGam
     const [opponentSelection, setOpponentSelection] = useState("Waiting for Opponent to Play")
     
     const clickHandler =  (value) => {
-      console.log(value)
+      //console.log(value)
       if(socket){
         switch(player){
           case "1":
