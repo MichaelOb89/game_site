@@ -1,5 +1,6 @@
 const games = []
 
+
 exports.games = games
 
 const checkResults = (game) => {
@@ -51,6 +52,11 @@ exports.getGames = () =>
         }
     })
 
+exports.removeGame = (socket) => {
+    const i = games.findIndex(g=>g.players.includes(socket))
+    games.splice(i,1)
+    console.log(games)
+}
 
 exports.createGame = (player, lobbyName) => {
     const game = {

@@ -20,6 +20,7 @@ export default function RPSLS_MultiPlayer({socket, roundResult, player, currentG
 
 
     const clickHandler =  (value) => {
+
       if(socket){
         switch(player){
           case "1":
