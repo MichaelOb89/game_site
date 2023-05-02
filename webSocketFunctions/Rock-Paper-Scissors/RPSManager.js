@@ -52,10 +52,22 @@ exports.getGames = () =>
         }
     })
 
+exports.findGame = (socket) => {
+    return games.find(g=>g.players.includes(socket))
+}
+
+exports.removePlayer = (socket) => {
+    const i = games.findIndex(g=>g.players.includes(socket))
+    if(i!=-1){
+        const j = games[i].players.findIndex(p=>p==socket)
+        games[i].players.splice(j,1)
+        return games[i]
+    }
+}
+
 exports.removeGame = (socket) => {
     const i = games.findIndex(g=>g.players.includes(socket))
     games.splice(i,1)
-    //console.log(games)
 }
 
 exports.createGame = (player, lobbyName) => {

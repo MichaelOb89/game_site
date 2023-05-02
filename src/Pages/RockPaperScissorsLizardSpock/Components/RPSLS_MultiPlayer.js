@@ -16,7 +16,7 @@ export default function RPSLS_MultiPlayer({socket, roundResult, player, currentG
         setRestart(null)
         setRoundResult(null)
       })
-    }, games)
+    }, [games])
 
 
     const clickHandler =  (value) => {
