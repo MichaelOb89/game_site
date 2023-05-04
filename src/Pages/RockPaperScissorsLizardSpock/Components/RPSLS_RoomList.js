@@ -14,11 +14,9 @@ export default function RPSLS_RomList({socket, setSocket}){
     const [player, setPlayer] = useState(null)
     const [roundResult, setRoundResult] = useState(null)
 
-    
     const createRoom = (lobbyName) => {
         socket.emit('createRoom', lobbyName)
         setPlayer("1")
-        setCurrentGame(lobbyName)
     }
 
     const handleClick = (evt) => {
@@ -26,13 +24,13 @@ export default function RPSLS_RomList({socket, setSocket}){
         setStartGame("waiting")
     }
 
-    const joinGame = (gameName) => {
+    const joinGame = (gameId) => {
         setPlayer("2")
-        socket.emit('joinRoom', gameName)
+        socket.emit('joinRoom', gameId)
         socket.on('games', (games)=>{
             setGames(games)
         })
-        setCurrentGame(gameName)
+        setCurrentGame(gameId)
         setStartGame(true)
     }
     
@@ -43,13 +41,21 @@ export default function RPSLS_RomList({socket, setSocket}){
         })
         newSocket.on('games', (games)=>{
             setGames(games)
+            console.log(games)
+        })
+        newSocket.on('opponentLeft', ()=>{
+            alert("Opponent left the game!")
+            window.close()
+        })
+        newSocket.on('roomCreated', (id)=>{
+            setCurrentGame(id)
         })
         setSocket(newSocket)
     },[])
 
     useEffect(()=>{
         if(currentGame && games){
-            const foundGame = games.find(game=>game.name==currentGame)
+            const foundGame = games.find(game=>game.id==currentGame)
             if(foundGame.numberOfPlayers==2){
                 setStartGame(true)
             }
@@ -70,10 +76,10 @@ export default function RPSLS_RomList({socket, setSocket}){
                 {games? 
                 games.map(game=>{
                     return(
-                        <div key={game.name}>
+                        <div key={game.id}>
                             <h1 className={styles.lobbyName}>Lobby name:{game.name}</h1>
                             <h2 className={styles.playersName}>Players:{game.numberOfPlayers}</h2>
-                            {game.numberOfPlayers<2?<button onClick={()=>joinGame(game.name)}>Join game</button>:""}
+                            {game.numberOfPlayers<2?<button onClick={()=>joinGame(game.id)}>Join game</button>:""}
                         </div>
                     )
                 }):
