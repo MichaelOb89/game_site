@@ -1,7 +1,7 @@
 const {games, joinGame} = require('./RPSManager')
 const sendGames = require('./sendGames')
 
-module.exports = ({io, socket}) => (gameName) => {
-    joinGame(socket, gameName)
+module.exports = ({io, socket}) => (gameId) => {
+    joinGame(socket, gameId)
     sendGames(io)
 }

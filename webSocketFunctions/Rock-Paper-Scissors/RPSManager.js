@@ -1,5 +1,6 @@
 const games = []
 
+let gameId=1
 
 exports.games = games
 
@@ -82,13 +83,16 @@ exports.createGame = (player, lobbyName) => {
         p2CurrentPlay: null,
         roundWinner: null,
         p1Restart: null,
-        p2Restart: null
+        p2Restart: null,
+        id: gameId
     }
+    gameId++
     games.push(game)
+    return game.id
 }
 
 exports.restart = (game) => {
-    const foundGame = games.find(g=>g.name==game.game)
+    const foundGame = games.find(g=>g.id==game.game)
     //console.log(game)
     if(game.player==1){
         foundGame.p1Restart = true
@@ -105,13 +109,14 @@ exports.restart = (game) => {
     }
 }
 
-exports.joinGame =(player, gameName) => {
-    const foundGame = games.find(game=>game.name==gameName)
+exports.joinGame =(player, gameId) => {
+    console.log(gameId)
+    const foundGame = games.find(game=>game.id==gameId)
     foundGame.players.push(player)
 }
 
 exports.play = (updatedGame) => {
-    const foundGame = games.find(game=>game.name==updatedGame.game)
+    const foundGame = games.find(game=>game.id==updatedGame.game)
     if(updatedGame.player == 1){
         foundGame.p1CurrentPlay = updatedGame.play
     }else if(updatedGame.player == 2){

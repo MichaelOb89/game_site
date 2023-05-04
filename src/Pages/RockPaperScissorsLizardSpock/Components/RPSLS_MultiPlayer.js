@@ -8,7 +8,7 @@ export default function RPSLS_MultiPlayer({socket, roundResult, player, currentG
     const [userSelection, setUserSelection] = useState(null)
     const [restart, setRestart] = useState(null)    
 
-    const foundGame = games.find(game=>game.name==currentGame)
+    const foundGame = games.find(game=>game.id==currentGame)
     
     useEffect(()=>{
       socket.on('restart',()=>{
